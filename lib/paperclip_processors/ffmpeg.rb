@@ -182,7 +182,7 @@ module Paperclip
       command = "ffprobe \"#{File.expand_path(@file.path)}\" 2>&1"
       Paperclip.log("[ffmpeg] #{command}")
       ffmpeg = Cocaine::CommandLine.new(command).run
-      ffmpeg.split("\n").each do |line|
+      ffmpeg.force_encoding('ISO-8859-1').split("\n").each dc |line|
         if line =~ /(([\d\.]*)\s.?)fps,/
           meta[:fps] = $1.to_i
         end
